@@ -83,6 +83,10 @@ SynthDef(\chordPlayer, { |freqs = #[440], amp = 0.3, out = 0|
 
 
 (
+s.waitForBoot {
+    var oscPort = 57120; // or whatever port you use
+
+(
 OSCdef(\measuredStateToChord, { |msg|
     var rawStr, stateArray, freqs;
 
@@ -114,7 +118,11 @@ OSCdef(\measuredStateToChord, { |msg|
     } {
         "No chord mapped for state %".format(stateArray).warn;
     };
-}, "/measured_state");
+}, "/measured_state", nil, 8888);
+)
+
+
+};
 )
 
 
