@@ -81,6 +81,10 @@ SynthDef(\wavetableSynth, {
 x = Synth(\wavetableSynth, [\buf, b.bufnum]);
 
 (
+s.waitForBoot {
+    var oscPort = 57120; // or whatever port you use
+
+(
 // 2. OSCdef for current_channel_probs
 OSCdef(\recvProbs, { |msg, time, addr|
     var probs = msg.asArray.drop(1);
@@ -109,6 +113,9 @@ b.loadCollection(~wt);
 
 	}, '/current_channel_probs', nil, 8888);
 
+)
+
+};
 )
 
 //check the waveform changes graphically
